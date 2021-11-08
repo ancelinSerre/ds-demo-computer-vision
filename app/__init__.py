@@ -16,10 +16,10 @@ from keras.preprocessing.image import load_img, img_to_array
 from keras.applications.vgg16 import preprocess_input
 
 # AWS Credentials
-with open(".aws/credentials.json", "r") as f:
-    cred = json.loads(f.read())
-ACCESS_KEY = cred["ACCESS_KEY"]
-SECRET_KEY = cred["SECRET_KEY"]
+# with open(".aws/credentials.json", "r") as f:
+#     cred = json.loads(f.read())
+# ACCESS_KEY = cred["ACCESS_KEY"]
+# SECRET_KEY = cred["SECRET_KEY"]
 
 # Upload folder and supported image formats
 UPLOAD_FOLDER = "static/uploads"
@@ -30,18 +30,18 @@ MODEL = load_model("app/static/model/model.h5")
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def upload_to_aws(local_file, bucket, s3_file):
-    s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
-    try:
-        s3.upload_file(local_file, bucket, s3_file)
-        print("Upload Successful")
-        return True
-    except FileNotFoundError:
-        print("The file was not found")
-        return False
-    except NoCredentialsError:
-        print("Credentials not available")
-        return False
+# def upload_to_aws(local_file, bucket, s3_file):
+#     s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+#     try:
+#         s3.upload_file(local_file, bucket, s3_file)
+#         print("Upload Successful")
+#         return True
+#     except FileNotFoundError:
+#         print("The file was not found")
+#         return False
+#     except NoCredentialsError:
+#         print("Credentials not available")
+#         return False
 
 def preprocess_image(filename):
     img = load_img(filename, target_size=(224, 224))  # Charger l'image
