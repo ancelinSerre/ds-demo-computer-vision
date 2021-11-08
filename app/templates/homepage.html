@@ -22,6 +22,11 @@
                 </form>
             </div>
         </div>
+        {% if "image" in data %}
+        <div class="card pic">
+            <img src="/static/uploads/{{data.image}}" class="rounded mx-auto d-block img-fluid" alt="uploaded picture">
+        </div>
+        {% endif %}
         {% if "name" in data %}
         <div class="alert alert-secondary" role="alert">
             Nous avons détecté que votre signalement concerne la chose suivante : <b>{{data["name"]}}</b>

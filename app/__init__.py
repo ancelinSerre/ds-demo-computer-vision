@@ -104,7 +104,11 @@ def create_app():
                 # )
                 # The fact we upload a new file on S3 should trigger a lambda that would act as an endpoint
                 # On the lambda we should instantiate the model and predict the image class
-                return render_template("homepage.html", data={"name": pred[0], "value": pred[1]})
+                return render_template("homepage.html", data={
+                    "name": pred[0], 
+                    "value": pred[1],
+                    "image": filename
+                })
 
         return render_template("homepage.html")
 
